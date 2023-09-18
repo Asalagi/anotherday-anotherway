@@ -15,13 +15,13 @@ app.get('/', (req, res) => {
     res.send(`Hi from ${port}`);
 });
 
-app.get('/candles', async (req, res) => {
+app.get('/candles', (req, res) => {
     candleModel.getCandles()
     .then(response => {
         res.status(200).send(response);
     })
     .catch(error => {
-        res.status.send(error);
+        res.status(500).send(error);
     });
 });
 
