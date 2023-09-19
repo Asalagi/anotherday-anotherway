@@ -15,10 +15,10 @@ const getCandles = () => {
 const addCandle = (body) => {
     return new Promise(async (resolve, reject) => {
         const {candle_name, candle_scent, candle_size, candle_summary, candle_price} = body;
-        pool.query('INSERT INTO candle (candle_name, candle_scent, candle_size, candle_summary, candle_price VALUE ($1, $2, $3, $4, $5) RETURNING *',
+        pool.query('INSERT INTO candle (candle_name, candle_scent, candle_size, candle_summary, candle_price) VALUES ($1, $2, $3, $4, $5) RETURNING *',
         [candle_name, candle_scent, candle_size, candle_summary, candle_price], (error, results) => {
             if(error) {
-                reject (error)
+                reject ('error has occured with model', error)
             } else {
                 resolve(`A new candle product has been added ${results.rows[0]}`);
             }

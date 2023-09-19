@@ -30,7 +30,7 @@ app.post('/candles', (req, res) => {
     .then(response => {
         res.status(200).send(response);
     })
-    .catch (error => {
+    .catch(error => {
         res.status(500).send(error);
     });
 });
