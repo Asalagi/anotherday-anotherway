@@ -1,10 +1,12 @@
-
+import { BrowserRouter, Routes, Route } from react-router-dom;
 function App() {
   return (
-    <div>
-      <h1>I am empty</h1>
-    </div>
-  );
+    <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<CandleHome/>}/>
+    </Routes>
+    </BrowserRouter>
+    );
 }
 
 export default App;
