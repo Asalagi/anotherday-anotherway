@@ -1,42 +1,40 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-function AddCandle() {
+function AddCandle(){
     const [candle, setCandle] = useState({
         candle_name: '',
         candle_scent: '',
         candle_size: '',
         candle_price: '',
         candle_summary: '',
-    });
+    })
 
-   const handleChange = (e) => {
-    setCandle({
-        ...candle,
-        [e.target.name]: e.target.value,
-    });
-   }
+    const handleChange = (e) => {
+        setCandle({
+            ...candle,
+            [e.target.name]: e.target.value,
+        });
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
         const newCandle = {
             candle_name: candle.candle_name,
             candle_scent: candle.candle_scent,
             candle_size: candle.candle_size,
             candle_price: candle.candle_price,
-            candle_summary: candle.candle_summary
+            candle_summary: candle.candle_summary, 
         }
 
-        axios.post('http://localhost:3001/candles', newCandle) 
+        axios.post('http://localhost:3001/candles', newCandle)
             .then(response => {
-                console.log(response);
+                console.log('a new candle was added', response);
             })
             .catch(error => {
-                console.log('there has been an error', error);
+                console.log('an error has occurred', error);
             });
     }
-
 
     return (
         <div>
