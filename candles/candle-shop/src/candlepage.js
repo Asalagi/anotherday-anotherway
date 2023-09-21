@@ -1,9 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function CandlePage() {
     const { candle_id } = useParams();
+    const navigate = useNavigate();
     const [candle, setCandle] = useState([]);
 
     useEffect(() => {
@@ -12,6 +13,17 @@ function CandlePage() {
         .catch(error => console.log(error))
     }, [candle_id]);
 
+    const handleDelete = () => {
+        axios.delete(`http://localhost:3001/candles/${candle_id}`)
+        .then(response => {
+            console.log(`Candl with id of ${candle_id} has been deleted`, response);
+            navigate('/seecandles');
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    };
+
     return (
         <div>
                     {candle.candle_id} - 
@@ -19,7 +31,7 @@ function CandlePage() {
                     {candle.candle_scent} - 
                     {candle.candle_size} oz. -
                     {candle.candle_summary}<br/>
-                    <button>Delete</button><br/>
+                    <button onClick={handleDelete}>Delete</button><br/>
                     <button>Edit</button>
         </div>
     )

@@ -38,8 +38,21 @@ const addCandle = (body) => {
     });
 };
 
+const deleteCandle = (candle_id) => {
+    return new Promise(async (resolve, reject) => {
+        pool.query('DELETE FROM candle WHERE candle_id = $1', [candle_id], (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(`candle with id of ${candle_id}`)
+            }
+        });
+    });
+};
+
 module.exports = {
     getCandles,
     getCandlesId,
     addCandle,
+    deleteCandle,
 }

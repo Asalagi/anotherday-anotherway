@@ -36,6 +36,16 @@ app.get('/candles/:candle_id', (req, res) => {
     });
 });
 
+app.delete('/candles/:candle_id', (req, res) => {
+    candleModel.deleteCandle(req.params.candle_id)
+    .then(response => {
+        res.status(200).send(response);
+    })
+    .catch(error => {
+        res.status(500).send(error);
+    });
+});
+
 app.post('/candles', (req, res) => {
     candleModel.addCandle(req.body)
     .then(response => {
