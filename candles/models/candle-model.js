@@ -12,6 +12,18 @@ const getCandles = () => {
     });
 };
 
+const getCandlesId = (candle_id) => {
+    return new Promise(async (resolve, reject) => {
+        pool.query('SELECT * FROM candle WHERE candle_id = $1', [candle_id], (error, results) => {
+            if (error) {
+                reject(error)
+            } else {
+                resolve(results.rows[0]);
+            }
+        });
+    });
+};
+
 const addCandle = (body) => {
     return new Promise(async (resolve, reject) => {
         const {candle_name, candle_scent, candle_size, candle_summary, candle_price} = body;
@@ -28,5 +40,6 @@ const addCandle = (body) => {
 
 module.exports = {
     getCandles,
+    getCandlesId,
     addCandle,
 }
