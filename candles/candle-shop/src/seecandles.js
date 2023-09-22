@@ -6,10 +6,14 @@ function SeeCandle() {
     const [seeCandles, setSeeCandles] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:3001/candles/')
-        .then(response => setSeeCandles(response.data))
-        .catch(error => console.log(error))
-    }, []);
+        axios.get('http://localhost:3001/candles')
+            .then(response => {
+                setSeeCandles(response.data);
+            })
+            .catch (error => {
+                console.log('something is wrong', error);
+            })             
+     }, []);
 
     return (
         <div>

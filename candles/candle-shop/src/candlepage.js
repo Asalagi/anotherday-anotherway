@@ -9,14 +9,18 @@ function CandlePage() {
 
     useEffect(() => {
         axios.get(`http://localhost:3001/candles/${candle_id}`)
-        .then(response => setCandle(response.data))
-        .catch(error => console.log(error))
+        .then(response => {
+            setCandle(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }, [candle_id]);
 
     const handleDelete = () => {
         axios.delete(`http://localhost:3001/candles/${candle_id}`)
         .then(response => {
-            console.log(`Candl with id of ${candle_id} has been deleted`, response);
+            console.log(`Candle with id of ${candle_id} has been deleted`, response);
             navigate('/seecandles');
         })
         .catch(error => {

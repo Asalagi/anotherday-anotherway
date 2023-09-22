@@ -1,16 +1,15 @@
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const candleModel = require('./models/candle-model');
-const { response } = require('express');
 const app = express();
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const port = 3001;
 
 app.use(cors());
 
-const port = 3001;
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
     res.send(`Hi from ${port}`);

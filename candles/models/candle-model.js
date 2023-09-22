@@ -4,7 +4,7 @@ const getCandles = () => {
     return new Promise(async (resolve, reject) => {
         pool.query('SELECT * FROM candle ORDER BY candle_id ASC', (error, results) => {
             if (error) {
-                reject (error)
+                reject ('something has been rejcts', error)
             } else {
                 resolve(results.rows);
             };
@@ -38,13 +38,28 @@ const addCandle = (body) => {
     });
 };
 
+const updateCandle = (candle_id, candleUpdate) => {
+    return new Promise(async (resolve, reject) => {
+        const {candle_name, candle_scent, candle_size, candle_summary, candle_price} = candleUpdate;
+        pool.query('UPDATE candle SET candle_name= $1, candle_scent= $2, candle_size= $3, candle_summary= $4, candle_price= $5 WHERE id = $1', [candle_id], (error, results) => {
+            [candle_name, candle_scent, candle_size, candle_summary, candle_price], (error, results) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(`candle with id of ${candle_id} was updated`)
+                }
+            }
+        })
+    })
+}
+
 const deleteCandle = (candle_id) => {
     return new Promise(async (resolve, reject) => {
         pool.query('DELETE FROM candle WHERE candle_id = $1', [candle_id], (error, results) => {
             if (error) {
                 reject(error);
             } else {
-                resolve(`candle with id of ${candle_id}`)
+                resolve(`candle with id of ${candle_id} was deleted`)
             }
         });
     });
@@ -54,5 +69,6 @@ module.exports = {
     getCandles,
     getCandlesId,
     addCandle,
+    updateCandle,
     deleteCandle,
 }
