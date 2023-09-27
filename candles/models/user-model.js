@@ -16,15 +16,10 @@ const getMember = () => {
 
 const addMember = (body) => {
     return new Promise(async (resolve, reject) => {
-        const password = req.body.member_password;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
-        const members = {
-            "member_name": req.body.member_name, 
-            "member_email": req.body.member_email,
-            "member_password": hashedPassword
-        } = body;
+        const {member_name, member_email, member_password} = body;
+        const hashedPassword = await bcrypt.hash(member_password, saltRounds);
         pool.query('INSERT INTO member (member_name, member_email, member_password) VALUES ($1, $2, $3) RETURNING *',
-        [member_name, member_email, member_password], (error, results) => {
+        [member_name, member_email, hashedPassword], (error, results) => {
             if(error) {
                 reject ('error has occured with model', error)
             } else {

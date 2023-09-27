@@ -23,7 +23,7 @@ function SignUp(){
             member_password: member.member_password
         }
 
-        axios.post('http://localhost:3001/candles', newMember)
+        axios.post('http://localhost:3001/members', newMember)
             .then(response => {
                 console.log('you have successfully signed up', response);
             })
@@ -38,7 +38,7 @@ function SignUp(){
             <form onSubmit={handleSubmit}>
                 <label>Name</label><input type="text" name="member_name" value={member.member_name} onChange={handleChange}/><br/>
                 <label>Email</label><input type="text" name="member_email" value={member.member_email} onChange={handleChange}/><br/>
-                <label>Password</label><input type="text" name="member_password" value={member.member_password} onChange={handleChange}/><br/>
+                <label>Password</label><input type="password" name="member_password" value={member.member_password} onChange={handleChange}/><br/>
                 <button type="submit">Sign Up</button>
             </form>
         </div>
