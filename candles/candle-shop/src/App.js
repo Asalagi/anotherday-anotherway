@@ -4,6 +4,7 @@ import CandleHome from './home';
 import AddCandle from './addcandle';
 import SeeCandles from './seecandles';
 import CandlePage from './candlepage';
+import Login from './login';
 import SignUp from './signup';
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Route path="/seecandles" element={<SeeCandles/>}/>
       <Route path="/candles/:candle_id" element={<CandlePage/>}/>
       <Route path="/signup" element={<SignUp/>}/>
+      <Route path="/login" element={<Login/>}/>
     </Routes>
     </Router>
     );
