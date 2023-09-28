@@ -29,7 +29,22 @@ const addMember = (body) => {
     });
 };
 
+const loginMember = (body) => {
+    return new Promise(async (resolve, reject) => {
+        const {member_email, member_passowrd} = body;
+        pool.query('SELECT * FROM member WHERE member_email = $1 AND password = $2', 
+        [member_email, member_passowrd], (error, results) => {
+            if(error) {
+                reject ('error has occured with loginMember', error)
+            } else {
+                resolve('Login worked successfully', results.rows[0]);
+            }
+        });
+    });
+};
+
 module.exports = {
     getMember,
     addMember,
+    loginMember,
 }
