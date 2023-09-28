@@ -66,6 +66,10 @@ app.get('/members', (req, res) => {
     });
 });
 
+app.get('/login', (req, res) => {
+    res.send("this is a login page");
+});
+
 app.post('/members', (req, res) => {
     memberModel.addMember(req.body)
     .then(response => {
@@ -75,6 +79,7 @@ app.post('/members', (req, res) => {
         res.status(500).send(error);
     });
 });
+
 app.post('/login', (req, res) => {
     memberModel.loginMember(req.body)
     .then(response => {

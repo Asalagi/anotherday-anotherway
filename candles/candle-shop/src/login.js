@@ -7,7 +7,7 @@ function Login() {
         
         axios.post("http://localhost:3001/login", { member_email, member_password })
           .then(response => {
-            console.log(response)
+            console.log(response, member_email, member_password)
           });
       }
     
