@@ -34,7 +34,7 @@ function SignUp(){
 
     return (
         <div>
-            <h1>Add A Candle</h1>
+            <h1>Become A Member</h1>
             <form onSubmit={handleSubmit}>
                 <label>Name</label><input type="text" name="member_name" value={member.member_name} onChange={handleChange}/><br/>
                 <label>Email</label><input type="text" name="member_email" value={member.member_email} onChange={handleChange}/><br/>

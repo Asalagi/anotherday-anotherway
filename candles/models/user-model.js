@@ -31,9 +31,9 @@ const addMember = (body) => {
 
 const loginMember = (body) => {
     return new Promise(async (resolve, reject) => {
-        const {member_email, member_passowrd} = body;
-        pool.query('SELECT * FROM member WHERE member_email = $1 AND password = $2', 
-        [member_email, member_passowrd], (error, results) => {
+        const {member_email, member_password} = body;
+        pool.query('SELECT * FROM member WHERE member_email = $1 AND member_password = $2', 
+        [member_email, member_password], (error, results) => {
             if(error) {
                 reject ('error has occured with loginMember', error)
             } else {
