@@ -32,8 +32,9 @@ const addMember = (body) => {
 const loginMember = (body) => {
     return new Promise(async (resolve, reject) => {
         const {member_email, member_password} = body;
+        const hashedPassword = await bcrypt.hash(member_password, saltRounds);
         pool.query('SELECT * FROM member WHERE member_email = $1 AND member_password = $2', 
-        [member_email, member_password], (error, results) => {
+        [member_email, hashedPassword], (error, results) => {
             if(error) {
                 reject ('error has occured with loginMember', error)
             } else {

@@ -5,7 +5,7 @@ function Login() {
       const handleSubmit = e => {
         e.preventDefault()
         
-        axios.post("https://localhost:3001/login", { member_email, member_password })
+        axios.post("http://localhost:3001/login", { member_email, member_password })
           .then(response => {
             console.log(response)
           });
