@@ -1,7 +1,10 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp(){
+    const nav = useNavigate();
+
     const [member, setMember] = useState({
         member_name: '',
         member_email: '',
@@ -25,6 +28,7 @@ function SignUp(){
 
         axios.post('http://localhost:3001/members', newMember)
             .then(response => {
+                nav('/login');
                 console.log('you have successfully signed up', response);
             })
             .catch(error => {

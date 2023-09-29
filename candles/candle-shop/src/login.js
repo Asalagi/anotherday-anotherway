@@ -1,14 +1,11 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [member, setMember] = useState({
     member_email: '',
     member_password: '',
   });
-
-  const navigate = useNavigate('');
 
   const handleChange = (e) => {
     setMember(prev => ({...prev, [e.target.name]: [e.target.value]}))
@@ -18,7 +15,6 @@ function Login() {
         
         axios.post("http://localhost:3001/login", member)
           .then(response => {
-            navigate('/addcandle')
             console.log(response, member)
           });
       }
