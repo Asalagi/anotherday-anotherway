@@ -1,6 +1,5 @@
 const pool = require('../config/config');
 const bcrypt = require('bcrypt');
-const saltRounds = 10;
 
 const getMember = () => {
     return new Promise(async (resolve, reject) => {
@@ -17,7 +16,7 @@ const getMember = () => {
 const addMember = (body) => {
     return new Promise(async (resolve, reject) => {
         const {member_name, member_email, member_password} = body;
-        const hashedPassword = await bcrypt.hash(member_password, saltRounds);
+        const hashedPassword = await bcrypt.hash(member_password, 10);
         pool.query('INSERT INTO member (member_name, member_email, member_password) VALUES ($1, $2, $3) RETURNING *',
         [member_name, member_email, hashedPassword], (error, results) => {
             if(error) {
@@ -29,17 +28,17 @@ const addMember = (body) => {
     });
 };
 
-const loginMember = (body) => {
+const loginMember = () => {
     return new Promise(async (resolve, reject) => {
-        const {member_email, member_password} = body;
-        pool.query('SELECT * FROM member WHERE member_email = $1 AND member_password = $2', 
-        [member_email, member_password], (error, results) => {
-            if(error) {
-                reject ('error has occured with loginMember', error)
+        pool.query('SELECT * FROM member WHERE member_email = ? AND member_password = ?', 
+        [req.body.member_email, req.body.member_password],
+        (error, results) => {
+            if (error) {
+                reject ('something has been rejcts', error)
             } else {
-                resolve('Login worked successfully', results.rows[0]);
-            }
-        });
+                resolve(results.rows);
+            };
+        });    
     });
 };
 
