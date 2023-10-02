@@ -28,10 +28,10 @@ const addMember = (body) => {
     });
 };
 
-const loginMember = () => {
+const loginMember = (requestBody) => {
     return new Promise(async (resolve, reject) => {
         pool.query('SELECT * FROM member WHERE member_email = ? AND member_password = ?', 
-        [req.body.member_email, req.body.member_password],
+        [requestBody.member_email, requestBody.member_password], 
         (error, results) => {
             if (error) {
                 reject ('something has been rejcts', error)

@@ -28,7 +28,7 @@ function SignUp(){
 
         axios.post('http://localhost:3001/members', newMember)
             .then(response => {
-                nav('/login');
+                nav('/login')
                 console.log('you have successfully signed up', response);
             })
             .catch(error => {
